@@ -1,0 +1,15 @@
+---
+- name: Deploy New Version to All Instances
+  hosts: app*
+  become: yes
+
+  tasks:
+    - name: Update homepage
+      copy:
+        content: "NEW VERSION - {{ inventory_hostname }}"
+        dest: /var/www/html/index.html
+
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted

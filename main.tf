@@ -73,6 +73,7 @@ resource "aws_instance" "app" {
   instance_type = var.instance_type
   subnet_id     = element(data.aws_subnets.default.ids, count.index)
   vpc_security_group_ids = [aws_security_group.app_sg.id]
+  key_name = "13apr"
 
   user_data = <<-EOF
               #!/bin/bash

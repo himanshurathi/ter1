@@ -1,0 +1,15 @@
+---
+- name: Canary Deployment
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Deploy canary version
+      copy:
+        content: "CANARY VERSION - {{ inventory_hostname }}"
+        dest: /var/www/html/index.html
+
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted

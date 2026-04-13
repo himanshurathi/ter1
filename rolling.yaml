@@ -1,0 +1,20 @@
+---
+- name: Rolling Deployment
+  hosts: tag_app_*
+  become: yes
+  serial: 1
+
+  tasks:
+    - name: Update homepage (rolling)
+      copy:
+        content: "ROLLING VERSION - {{ inventory_hostname }}"
+        dest: /var/www/html/index.html
+
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted
+
+    - name: Wait before next host
+      pause:
+        seconds: 10
