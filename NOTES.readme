@@ -1,0 +1,39 @@
+# INTUNE
+
+For free trial - https://go.microsoft.com/fwlink/?linkid=2019088 - login with personal id
+
+
+Create a user, set its password, assign the user intune license and intule admin role.
+In entra go to mobility and set the free trial.
+Set up mdm for all and mdm url and other things.
+On the device - run -  deviceenroller.exe /c /AutoEnrollMDM.
+Then login in settings accounts.
+Check the device in entra.
+dsregcmd /status
+Should show mdm url and other things.
+Register with the device
+Go to device and show the properties -  explain
+
+
+# SOFTWARE DEPLOYMENT
+
+Software deployment 
+Provision aws, ubuntu
+Install terraform
+Install aws cli - apt-get install awscli
+apt-get install python3-boto3 python3-botocore
+Do aws configure
+Clone the repo
+In ec2, create a keypair.
+Replace the ami and region,key pair name
+Terraform init –auto-approve
+Connect with the lb
+Install ansible 
+apt update
+apt install software-properties-common
+add-apt-repository --yes --update ppa:ansible/ansible
+apt install ansible
+Put the keypair file on ubuntu
+Provision infra
+ansible all -i aws_ec2.yaml -m ping --private-key /root/13apr.pem -u ubuntu
+ansible-playbook -i aws_ec2.yaml full_deploy.yaml --private-key /root/13apr.pem -u ubuntu
